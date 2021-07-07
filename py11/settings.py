@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 from decouple import config
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     #my apps
     'apps.main',
     'apps.category',
+    'apps.cart',
 ]
 
 MIDDLEWARE = [
@@ -118,8 +120,21 @@ USE_L10N = True
 
 USE_TZ = True
 
+SIMPLE_JWT = {
+    #на какое время доступен токен
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=200),
+    #обновление токена
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=2),
+}
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}

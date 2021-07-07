@@ -19,6 +19,7 @@ class Product(TimeABC):
     title = models.CharField(max_length=100, verbose_name='Название товара')
     desc = models.TextField(verbose_name='Описание товара')
     count_bill = models.PositiveIntegerField(default=0, verbose_name='Кол-во')
+    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена товара')
 
     class Meta:
         verbose_name = 'Товар'
